@@ -1,13 +1,17 @@
 import streamlit as st
 from transformers import AutoTokenizer, AutoModelForCausalLM
 import torch
+import os
 
-# Load the Qwen-2-7B model and tokenizer
+# Set the Hugging Face token environment variable
+HF_TOKEN = st.secrets["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"]  # Store token securely in Streamlit secrets
+
+# Load the Qwen-2-7B model and tokenizer with authentication
 @st.cache_resource  # Caching for efficiency
 def load_model():
     model_name = "Qwen/Qwen-2-7b"
-    tokenizer = AutoTokenizer.from_pretrained(model_name)
-    model = AutoModelForCausalLM.from_pretrained(model_name, torch_dtype=torch.float16)
+    tokenizer = AutoTokenizer.from_pretrained(model_name, use_auth_token=HF_TOKEN)
+    model = AutoModelForCausalLM.from_pretrained(model_name, torch_dtype=torch.float16, use_auth_token=HF_TOKEN)
     return tokenizer, model
 
 tokenizer, model = load_model()
