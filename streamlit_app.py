@@ -1,10 +1,9 @@
 import streamlit as st
 from transformers import AutoTokenizer, AutoModelForCausalLM
 import torch
-import os
 
-# Set the Hugging Face token environment variable
-HF_TOKEN = st.secrets["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"]  # Store token securely in Streamlit secrets
+# Retrieve the Hugging Face token from Streamlit secrets
+HF_TOKEN = st.secrets["HUGGINGFACE_TOKEN"]
 
 # Load the Qwen-2-7B model and tokenizer with authentication
 @st.cache_resource  # Caching for efficiency
