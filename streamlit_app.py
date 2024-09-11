@@ -8,7 +8,7 @@ HF_TOKEN = st.secrets["HUGGINGFACE_TOKEN"]
 # Load the Qwen-2-7B model and tokenizer with authentication
 @st.cache_resource  # Caching for efficiency
 def load_model():
-    model_name = "Qwen/Qwen-2-7b"
+    model_name = "Qwen/Qwen2-7B-Instruct"
     tokenizer = AutoTokenizer.from_pretrained(model_name, use_auth_token=HF_TOKEN)
     model = AutoModelForCausalLM.from_pretrained(model_name, torch_dtype=torch.float16, use_auth_token=HF_TOKEN)
     return tokenizer, model
